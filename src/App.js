@@ -33,7 +33,19 @@ class ContactsList extends React.Component {
     const sortedContacts = this.state.firstFiveContacts.sort((a, b) => {
       return a.name > b.name ? 1 : -1;
     });
-    console.log(sortedContacts);
+    // console.log(sortedContacts);
+
+    this.setState({
+      firstFiveContacts: sortedContacts,
+    });
+  };
+
+  //method to sort contacts by highest popularity
+  sortByPopularity = () => {
+    const sortedContacts = this.state.firstFiveContacts.sort((a, b) => {
+      return a.popularity < b.popularity ? 1 : -1;
+    });
+
     this.setState({
       firstFiveContacts: sortedContacts,
     });
