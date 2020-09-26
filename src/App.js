@@ -12,17 +12,31 @@ class ContactsList extends React.Component {
   }
 
   //method to add a random contact
+  //NOTE: need to add code to check for duplicates before adding to contacts list.
+
   addRandomContact = (newContact) => {
     let rndmNum = Math.floor(Math.random() * contacts.length);
     const contactsCopy = [...this.state.firstFiveContacts];
     newContact = this.state.fullList[rndmNum];
-    console.log(newContact);
+    // console.log(newContact);
     contactsCopy.push(newContact);
-    console.log(contactsCopy);
+    // console.log(contactsCopy);
     this.setState({
       firstFiveContacts: contactsCopy,
     });
-    console.log(this.state.firstFiveContacts);
+    // console.log(this.state.firstFiveContacts);
+  };
+
+  //method to sort contacts by name
+
+  sortByName = () => {
+    const sortedContacts = this.state.firstFiveContacts.sort((a, b) => {
+      return a.name > b.name ? 1 : -1;
+    });
+    console.log(sortedContacts);
+    this.setState({
+      firstFiveContacts: sortedContacts,
+    });
   };
 
   render() {
@@ -31,6 +45,8 @@ class ContactsList extends React.Component {
       <div id="App">
         <h1>IronContacts</h1>
         <button onClick={this.addRandomContact}>Add Random Contact</button>
+        <button onClick={this.sortByName}>Sort by Name</button>
+        <button onClick={this.sortByPopularity}>Sort by Popularity</button>
         <table>
           <thead>
             <tr>
