@@ -51,6 +51,17 @@ class ContactsList extends React.Component {
     });
   };
 
+  //method to delete a contact from the list.
+  deleteContact = (contactToDelete) => {
+    const filteredContacts = this.state.firstFiveContacts.filter(
+      (contact) => contact.id !== contactToDelete.id
+    );
+    console.log(filteredContacts);
+    this.setState({
+      firstFiveContacts: filteredContacts,
+    });
+  };
+
   render() {
     const { firstFiveContacts } = this.state;
     return (
@@ -65,6 +76,7 @@ class ContactsList extends React.Component {
               <th>Picture</th>
               <th>Name</th>
               <th>Popularity</th>
+              <th>Action</th>
             </tr>
           </thead>
           <tbody>
@@ -72,10 +84,19 @@ class ContactsList extends React.Component {
               return (
                 <tr key={contact.id}>
                   <th>
-                    <img src={contact.pictureUrl} style={{ height: 100 }}></img>
+                    <img
+                      src={contact.pictureUrl}
+                      style={{ height: 100 }}
+                      alt="celeb pic"
+                    ></img>
                   </th>
                   <th>{contact.name}</th>
-                  <th>{contact.popularity}</th>
+                  <th>{contact.popularity.toFixed(2)}</th>
+                  <th>
+                    <button onClick={() => this.deleteContact(contact)}>
+                      Delete
+                    </button>
+                  </th>
                 </tr>
               );
             })}
